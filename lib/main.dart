@@ -5,7 +5,7 @@ void main() {
     home:Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.amberAccent,
-        title: Text("alot of text" ,  style: GoogleFonts.roboto(fontSize: 24)  ),  
+        title: Text("alot of text"),  
       ) ,
     ) ,
   ));
