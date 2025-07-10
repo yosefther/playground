@@ -1,61 +1,76 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  // built-in color from Flutter's Colors class.
-  Color poop = Colors.brown;
+// --- Constants ---
+class AppColors {
+  static const Color appBarYellow = Color.fromARGB(255, 255, 231, 16);
+  static const Color containerDarkBrown = Color.fromARGB(255, 79, 58, 50);
+  static const Color scaffoldBackgroundBrown = Colors.brown;
+  static const Color textGrey = Colors.grey;
+}
 
-  // runApp takes a widget and makes it the root of the app.
-  runApp(
-    MaterialApp(
-      // The home parameter defines the first screen of the app.
-      home: Scaffold(
-        // App bar at the top of the screen with a yellow background and a title.
-        appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 255, 231, 16),
-          title: Text("title"),
-        ),
-        
-        // Background color of the main body of the scaffold is set to the 'poop' variable.
-        backgroundColor: poop,
+// --- Custom Container Widget ---
+class MyCustomContainer extends StatelessWidget {
+  const MyCustomContainer({super.key});
 
-        // The body of the screen — content goes here.
-        body: Center(
-          // Center widget centers its child both horizontally and vertically.
-          child: Container(
-            // Fixed width and height for the box
-            width: 400,
-            height: 500,
-
-            // Decoration is used for background styling including color and rounded corners.
-            decoration: BoxDecoration(
-              color: Color.fromARGB(255, 79, 58, 50), 
-              borderRadius: BorderRadius.circular(90000000),
-            ),
-
-            child: Center(
-              child: Text(
-                "BIG DATA REALY BIG SCARY DATA",
-                style: TextStyle(
-                  color: Colors.grey, 
-                  fontSize: 25,       
-                ),
-              ),
-            ),
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 400,
+      height: 500,
+      decoration: BoxDecoration(
+        color: AppColors.containerDarkBrown,
+        borderRadius: BorderRadius.circular(90000000),
+      ),
+      child: const Center(
+        child: Text(
+          "BIG DATA REALY BIG SCARY DATA",
+          style: TextStyle(
+            color: AppColors.textGrey,
+            fontSize: 25,
           ),
         ),
       ),
-    ),
-  );
+    );
+  }
 }
 
-/*
+// --- Home Screen Widget ---
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
-[Flutter engine]
-└─ runApp
-   └─ MaterialApp
-      └─ Scaffold
-          └─ (stuff)
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColors.appBarYellow,
+        title: const Text("title"),
+      ),
+      backgroundColor: AppColors.scaffoldBackgroundBrown,
+      body: const Center(
+        child: MyCustomContainer(),
+      ),
+    );
+  }
+}
 
- */
+// --- Main Application Widget ---
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-// OOP sucks. Bite me.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const HomeScreen(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+
+// --- Main Function (App Entry Point) ---
+void main() {
+  runApp(const MyApp());
+}
